@@ -1,0 +1,35 @@
+<ul nz-menu nzMode="inline">
+  <li
+    nz-menu-item
+    routerLink="/dashboard"
+    routerLinkActive="ant-menu-item-selected"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="close()"
+  >
+    <span nz-icon nzType="appstore"></span>
+    <span>Dashboard</span>
+  </li>
+
+  <li
+    nz-menu-item
+    routerLink="/warehouse"
+    routerLinkActive="ant-menu-item-selected"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="close()"
+  >
+    <span nz-icon nzType="inbox"></span>
+    <span>Warehouse</span>
+  </li>
+
+  <li
+    nz-menu-item
+    routerLink="/setting"
+    routerLinkActive="ant-menu-item-selected"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="close()"
+    nzDisabled="true"
+  >
+    <span nz-icon nzType="setting"></span>
+    <span>Setting</span>
+  </li>
+</ul>

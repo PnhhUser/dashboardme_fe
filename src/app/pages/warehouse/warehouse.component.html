@@ -1,0 +1,21 @@
+<div class="container">
+  <app-header>
+    <div start>
+      <nz-icon nzType="plus" nzTheme="outline" (click)="onToCreateOrders()" />
+    </div>
+    <div title>{{ title }}</div>
+    <div end>
+      <nz-icon
+        nzType="align-right"
+        nzTheme="outline"
+        (click)="onMenuClick()"
+      ></nz-icon>
+    </div>
+  </app-header>
+
+  <div class="cards-container">
+    @for (card of cards; track card.id) {
+      <app-card [card]="card" (click)="onCardClick(card)"></app-card>
+    }
+  </div>
+</div>

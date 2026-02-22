@@ -1,0 +1,22 @@
+{
+  "common": {},
+  "settings": {
+    "language": {
+      "vi": "Vietnam",
+      "en": "English"
+    }
+  },
+  "login": {
+    "title": "Login to your system",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginButton": "Log in",
+    "registerNow": "Register now!"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minlength": "Minimum length is {{min}} characters"
+  }
+}

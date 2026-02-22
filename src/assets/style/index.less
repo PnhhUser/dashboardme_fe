@@ -1,0 +1,38 @@
+header.container {
+  padding: 0 16px;
+  height: 40px;
+
+  .wrapper {
+    display: flex;
+    height: 100%;
+
+    .section {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Left */
+    .section:nth-child(1) {
+      flex: 1;
+      justify-content: flex-start;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* Center (title auto width) */
+    .section:nth-child(2) {
+      flex: 0 1 auto; // quan trọng
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Right */
+    .section:nth-child(3) {
+      flex: 1;
+      justify-content: flex-end;
+      font-size: large;
+    }
+  }
+}

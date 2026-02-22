@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { LanguageService } from './core/services/language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less'
+  template: '<router-outlet />',
 })
 export class AppComponent {
-  title = 'dashboard_me';
+  constructor(private languageService: LanguageService) {
+    this.languageService.setLanguage('en');
+  }
 }

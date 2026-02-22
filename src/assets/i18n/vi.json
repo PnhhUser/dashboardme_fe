@@ -1,0 +1,22 @@
+{
+  "common": {},
+  "settings": {
+    "language": {
+      "vi": "Tiếng Việt",
+      "en": "Tiếng Anh"
+    }
+  },
+  "login": {
+    "title": "Đăng nhập vào hệ thống của bạn",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "rememberMe": "Ghi nhớ đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "loginButton": "Đăng nhập",
+    "registerNow": "Đăng ký ngay!"
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "minlength": "Độ dài tối thiểu là {{min}} ký tự"
+  }
+}

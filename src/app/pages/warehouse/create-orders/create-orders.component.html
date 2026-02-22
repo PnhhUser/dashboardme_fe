@@ -1,0 +1,111 @@
+<div class="container">
+  <app-header>
+    <div start>
+      <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()" />
+    </div>
+    <div title>{{ title }}</div>
+  </app-header>
+
+  <div class="content">
+    <!-- SUPPLIER CARD -->
+    <div class="card">
+      <div class="card-title">Supplier Information</div>
+
+      <div class="form-group">
+        <label>Supplier</label>
+        <div class="select-input" (click)="openSupplierDrawer()">
+          {{ selectedSupplier?.name || "Select supplier" }}
+          <nz-icon nzType="right"></nz-icon>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input nz-input [value]="selectedSupplier?.phone" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Expected Date</label>
+        <nz-date-picker style="width: 100%"></nz-date-picker>
+      </div>
+    </div>
+
+    <!-- PRODUCT SECTION -->
+    <div class="card">
+      <div class="card-title">Products ({{ selectedProducts.length }})</div>
+
+      <button nz-button nzType="default" (click)="openProductDrawer()">
+        + Add Product
+      </button>
+
+      <div
+        class="product-card"
+        *ngFor="let p of selectedProducts; let i = index"
+      >
+        <div class="product-header">
+          {{ p.name }}
+          <nz-icon nzType="delete" (click)="removeProduct(i)"></nz-icon>
+        </div>
+
+        <div class="product-row">Price: {{ p.price | number }}</div>
+
+        <div class="product-row">
+          Qty:
+          <button nz-button nzSize="small" (click)="decreaseQty(i)">-</button>
+          {{ p.qty }}
+          <button nz-button nzSize="small" (click)="increaseQty(i)">+</button>
+        </div>
+
+        <div class="product-row total">
+          Total: {{ p.price * p.qty | number }}
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="card">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>{{ subtotal | number }}</span>
+      </div>
+
+      <div class="summary-row total">
+        <span>Total</span>
+        <span>{{ subtotal | number }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY ACTION BAR -->
+  <div class="bottom-bar">
+    <button nz-button nzType="default">Save Draft</button>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="!selectedProducts.length || !selectedSupplier"
+    >
+      Submit
+    </button>
+  </div>
+
+  <!-- SUPPLIER DRAWER -->
+  <nz-drawer
+    [nzVisible]="supplierDrawerVisible"
+    nzTitle="Select Supplier"
+    nzPlacement="right"
+    (nzOnClose)="supplierDrawerVisible = false"
+  >
+    <input nz-input placeholder="Search supplier" />
+
+    <div
+      class="drawer-item"
+      *ngFor="let s of suppliers"
+      (click)="selectSupplier(s)"
+    >
+      <div>{{ s.name }}</div>
+      <div class="phone">{{ s.phone }}</div>
+    </div>
+
+    <button nz-button nzType="link">+ Create New Supplier</button>
+  </nz-drawer>
+</div>

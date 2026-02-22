@@ -1,0 +1,94 @@
+<div class="wrapper-login">
+  <nz-card
+    style="width: 320px"
+    class="login-card"
+    nzTitle="{{ 'login.title' | translate }}"
+  >
+    <form
+      nz-form
+      [formGroup]="loginForm"
+      class="login-form"
+      (ngSubmit)="onSubmit()"
+    >
+      <!-- Username field -->
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="usernameErrorTpl">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="username"
+              placeholder="{{ 'login.username' | translate }}"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <ng-template #usernameErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          {{ "validation.required" | translate }}
+        </ng-container>
+        <ng-container *ngIf="control.hasError('minlength')">
+          {{ "validation.minlength" | translate: { min: 3 } }}
+        </ng-container>
+      </ng-template>
+
+      <!-- Password field -->
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTpl">
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              formControlName="password"
+              placeholder="{{ 'login.password' | translate }}"
+            />
+          </nz-input-group>
+
+          <ng-template #suffixTemplate>
+            <span
+              nz-icon
+              [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="onPasswordVisibilityChange(!passwordVisible)"
+              style="cursor: pointer"
+            ></span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <ng-template #passwordErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          {{ "validation.required" | translate }}
+        </ng-container>
+        <ng-container *ngIf="control.hasError('minlength')">
+          {{ "validation.minlength" | translate: { min: 6 } }}
+        </ng-container>
+      </ng-template>
+
+      <!-- Remember me and forgot password -->
+      <div nz-row class="bottom-16">
+        <!-- <div nz-col [nzSpan]="14">
+          <label
+            nz-checkbox
+            formControlName="remember"
+            (nzCheckedChange)="onRememberChange($event)"
+          >
+            <span>{{ "login.rememberMe" | translate }}</span>
+          </label>
+        </div> -->
+
+        <!--Forgot password link -->
+        <div nz-col [nzSpan]="10">
+          <a>{{ "login.forgotPassword" | translate }}</a>
+        </div>
+      </div>
+
+      <!-- Submit button and register link -->
+      <button nz-button class="btn-login bottom-16" [nzType]="'primary'">
+        {{ "login.loginButton" | translate }}
+      </button>
+
+      <!-- <a>{{ "login.registerNow" | translate }}</a> -->
+    </form>
+  </nz-card>
+</div>

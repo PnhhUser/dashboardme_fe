@@ -1,0 +1,53 @@
+<div class="container">
+  <app-header>
+    <div start>
+      <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()" />
+    </div>
+    <div title>{{ title }}</div>
+    <div end>
+      <nz-icon nzType="filter" nzTheme="outline" (click)="onFilter()" />
+    </div>
+  </app-header>
+
+  <div class="list-product">
+    <nz-card
+      *ngFor="let item of productList"
+      class="product-card"
+      nzHoverable
+      (click)="onCardClick(item)"
+    >
+      <div class="card-container">
+        <!-- IMAGE -->
+        <div class="image-box"></div>
+
+        <!-- INFO -->
+        <div class="info-section">
+          <div class="header-row">
+            <div class="product-name">{{ item.name }}</div>
+            {{ item.price | currency: "VND" : "symbol" : "1.0-0" : "vi-VN" }}
+          </div>
+
+          <div class="info-row">
+            <span class="label">Stock:</span>
+            <nz-badge
+              [nzStatus]="getStockBadgeStatus(item.stockStatus)"
+              [nzText]="formatStock(item.stockStatus)"
+            >
+            </nz-badge>
+          </div>
+
+          <div class="info-row">
+            <span class="label">Status:</span>
+            <nz-badge
+              [nzStatus]="
+                item.productStatus === 'active' ? 'success' : 'default'
+              "
+              [nzText]="formatProductStatus(item.productStatus)"
+            >
+            </nz-badge>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+</div>
