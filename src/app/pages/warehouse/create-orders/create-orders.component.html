@@ -1,111 +1,154 @@
-<div class="container">
+<div class="container create-order-container">
   <app-header>
     <div start>
-      <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()" />
+      <nz-icon nzType="rollback" (click)="onBack()" />
     </div>
     <div title>{{ title }}</div>
   </app-header>
 
-  <div class="content">
-    <!-- SUPPLIER CARD -->
-    <div class="card">
-      <div class="card-title">Supplier Information</div>
+  <div class="form-wrapper">
+    <form nz-form>
+      <!-- SUPPLIER -->
+      <nz-form-item>
+        <nz-form-label>Supplier</nz-form-label>
+        <nz-input-group [nzSuffix]="suffixIconRight">
+          <input
+            nz-input
+            readonly
+            [value]="selectedSupplier?.name"
+            placeholder="Choose supplier"
+            (click)="openDrawerSupplier()"
+          />
+        </nz-input-group>
 
-      <div class="form-group">
-        <label>Supplier</label>
-        <div class="select-input" (click)="openSupplierDrawer()">
-          {{ selectedSupplier?.name || "Select supplier" }}
-          <nz-icon nzType="right"></nz-icon>
+        <ng-template #suffixIconRight>
+          <nz-icon nzType="right" style="color: #bbb"></nz-icon>
+        </ng-template>
+      </nz-form-item>
+
+      <!-- PHONE -->
+      <nz-form-item>
+        <nz-form-label>Phone</nz-form-label>
+        <nz-input-group [nzPrefix]="phoneIcon">
+          <input nz-input readonly [value]="selectedSupplier?.phone" />
+        </nz-input-group>
+
+        <ng-template #phoneIcon>
+          <nz-icon nzType="phone" style="color: #bbb"></nz-icon>
+        </ng-template>
+      </nz-form-item>
+
+      <!-- ADD PRODUCT BUTTON -->
+      <nz-form-item>
+        <button
+          nz-button
+          nzType="dashed"
+          nzBlock
+          type="button"
+          (click)="openDrawerProduct()"
+        >
+          <span nz-icon nzType="plus"></span>
+          Add Product
+        </button>
+      </nz-form-item>
+
+      <!-- PRODUCT LIST -->
+      @if (selectedProducts.length > 0) {
+        <div style="margin-top: 24px">
+          <div style="font-weight: 600; margin-bottom: 12px">Product List</div>
+
+          @for (product of selectedProducts; track product.id) {
+            <nz-card nzHoverable style="margin-bottom: 12px">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div style="flex: 1">
+                  <div style="font-weight: 600">
+                    {{ product.name }}
+                  </div>
+
+                  <div style="color: #888; font-size: 13px; margin-top: 4px">
+                    {{ product.price | number }} đ
+                  </div>
+
+                  <div style="margin-top: 8px">
+                    <nz-input-number
+                      [(ngModel)]="product.quantity"
+                      [ngModelOptions]="{ standalone: true }"
+                      [nzMin]="1"
+                      nzSize="small"
+                    ></nz-input-number>
+                  </div>
+                </div>
+
+                <button
+                  nz-button
+                  nzType="text"
+                  nzDanger
+                  (click)="removeProduct(product.id)"
+                >
+                  <span nz-icon nzType="delete"></span>
+                </button>
+              </div>
+            </nz-card>
+          }
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>Phone</label>
-        <input nz-input [value]="selectedSupplier?.phone" readonly />
-      </div>
-
-      <div class="form-group">
-        <label>Expected Date</label>
-        <nz-date-picker style="width: 100%"></nz-date-picker>
-      </div>
-    </div>
-
-    <!-- PRODUCT SECTION -->
-    <div class="card">
-      <div class="card-title">Products ({{ selectedProducts.length }})</div>
-
-      <button nz-button nzType="default" (click)="openProductDrawer()">
-        + Add Product
-      </button>
-
-      <div
-        class="product-card"
-        *ngFor="let p of selectedProducts; let i = index"
-      >
-        <div class="product-header">
-          {{ p.name }}
-          <nz-icon nzType="delete" (click)="removeProduct(i)"></nz-icon>
-        </div>
-
-        <div class="product-row">Price: {{ p.price | number }}</div>
-
-        <div class="product-row">
-          Qty:
-          <button nz-button nzSize="small" (click)="decreaseQty(i)">-</button>
-          {{ p.qty }}
-          <button nz-button nzSize="small" (click)="increaseQty(i)">+</button>
-        </div>
-
-        <div class="product-row total">
-          Total: {{ p.price * p.qty | number }}
-        </div>
-      </div>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="card">
-      <div class="summary-row">
-        <span>Subtotal</span>
-        <span>{{ subtotal | number }}</span>
-      </div>
-
-      <div class="summary-row total">
-        <span>Total</span>
-        <span>{{ subtotal | number }}</span>
-      </div>
-    </div>
+      }
+    </form>
   </div>
 
-  <!-- STICKY ACTION BAR -->
-  <div class="bottom-bar">
-    <button nz-button nzType="default">Save Draft</button>
+  @if (selectedProducts.length > 0) {
+    <div class="order-summary">
+      <div class="summary-row">
+        <span>Total Items</span>
+        <span>{{ selectedProducts.length }}</span>
+      </div>
+
+      <!-- Shipping Fee -->
+      <div class="summary-row">
+        <span>Shipping Fee</span>
+        <nz-input-number
+          [(ngModel)]="shippingFee"
+          [ngModelOptions]="{ standalone: true }"
+          [nzMin]="0"
+          nzSize="small"
+        ></nz-input-number>
+      </div>
+
+      <!-- Other Fee -->
+      <div class="summary-row">
+        <span>Other Fee</span>
+        <nz-input-number
+          [(ngModel)]="otherFee"
+          [ngModelOptions]="{ standalone: true }"
+          [nzMin]="0"
+          nzSize="small"
+        ></nz-input-number>
+      </div>
+
+      <!-- Total -->
+      <div class="summary-row total">
+        <span>Total Amount</span>
+        <span>{{ totalAmount | number }} đ</span>
+      </div>
+    </div>
+  }
+
+  <!-- ACTION BUTTONS -->
+  <div class="form-actions">
+    <button nz-button nzType="default" (click)="onReset()">Reset</button>
+
     <button
       nz-button
       nzType="primary"
-      [disabled]="!selectedProducts.length || !selectedSupplier"
+      (click)="onCreate()"
+      [disabled]="!selectedSupplier || selectedProducts.length === 0"
     >
-      Submit
+      Create
     </button>
   </div>
-
-  <!-- SUPPLIER DRAWER -->
-  <nz-drawer
-    [nzVisible]="supplierDrawerVisible"
-    nzTitle="Select Supplier"
-    nzPlacement="right"
-    (nzOnClose)="supplierDrawerVisible = false"
-  >
-    <input nz-input placeholder="Search supplier" />
-
-    <div
-      class="drawer-item"
-      *ngFor="let s of suppliers"
-      (click)="selectSupplier(s)"
-    >
-      <div>{{ s.name }}</div>
-      <div class="phone">{{ s.phone }}</div>
-    </div>
-
-    <button nz-button nzType="link">+ Create New Supplier</button>
-  </nz-drawer>
 </div>

@@ -18,4 +18,17 @@
       <app-card [card]="card" (click)="onCardClick(card)"></app-card>
     }
   </div>
+
+  <div style="padding: 20px">
+    <button
+      nz-button
+      nzType="dashed"
+      nzBlock
+      style="height: 50px"
+      (click)="addCategory()"
+    >
+      <nz-icon nzType="plus" nzTheme="outline" />
+      Add Category
+    </button>
+  </div>
 </div>

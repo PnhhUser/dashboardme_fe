@@ -23,6 +23,18 @@
 
   <li
     nz-menu-item
+    routerLink="/purchase-history"
+    routerLinkActive="ant-menu-item-selected"
+    [routerLinkActiveOptions]="{ exact: true }"
+    nzDisabled="true"
+    (click)="close()"
+  >
+    <span nz-icon nzType="file-text"></span>
+    <span>Purchase History</span>
+  </li>
+
+  <li
+    nz-menu-item
     routerLink="/setting"
     routerLinkActive="ant-menu-item-selected"
     [routerLinkActiveOptions]="{ exact: true }"
