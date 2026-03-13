@@ -4,6 +4,10 @@
     "language": {
       "vi": "Vietnam",
       "en": "English"
+    },
+    "title": "Settings",
+    "catelog": {
+      "language": "Language"
     }
   },
   "login": {
@@ -18,5 +22,18 @@
   "validation": {
     "required": "This field is required",
     "minlength": "Minimum length is {{min}} characters"
+  },
+  "menu": {
+    "title": "Menu",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "data": {
+    "title": "Data"
+  },
+  "warehouse": {
+    "title": "Warehouse"
   }
 }

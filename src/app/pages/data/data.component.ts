@@ -1,27 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../layout/header/header.component';
-import { CommonModule } from '@angular/common';
-
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzDrawerService } from 'ng-zorro-antd/drawer';
-import { MenuDrawerComponent } from '../../shared/components/menu/menu.component';
+import { NzDrawerModule, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MenuDrawerComponent } from '../../shared/components/menu/menu.component';
+import { CardComponent } from '../../shared/components/card/card.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-data',
   standalone: true,
   imports: [
-    HeaderComponent,
     CommonModule,
+    HeaderComponent,
     NzIconModule,
-    NzDrawerModule,
     TranslateModule,
+    NzDrawerModule,
+    CardComponent,
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.less',
+  templateUrl: './data.component.html',
+  styleUrl: './data.component.less',
 })
-export class DashboardComponent {
+export class DataComponent {
   constructor(
     private drawerService: NzDrawerService,
     private translateService: TranslateService,

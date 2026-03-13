@@ -8,4 +8,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.layout.html',
   styleUrl: './app.layout.less',
 })
-export class AppLayout {}
+export class AppLayout {
+  constructor() {}
+}

@@ -2,7 +2,6 @@ import {
   ApplicationConfig,
   provideZoneChangeDetection,
   importProvidersFrom,
-  LOCALE_ID,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -18,6 +17,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule } from '@ngx-translate/core';
+import { authReducer } from './store/reducers/auth.reducer';
+import { AuthEffects } from './store/effects/auth.effect';
 
 registerLocaleData(en);
 registerLocaleData(vi);
@@ -27,8 +28,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore(),
-    provideEffects(),
     importProvidersFrom(FormsModule),
     provideAnimationsAsync(),
     provideNzI18n(en_US),
@@ -44,5 +43,11 @@ export const appConfig: ApplicationConfig = {
       prefix: '/assets/i18n/',
       suffix: '.json',
     }),
+
+    provideStore({
+      auth: authReducer,
+    }),
+
+    provideEffects([AuthEffects]),
   ],
 };

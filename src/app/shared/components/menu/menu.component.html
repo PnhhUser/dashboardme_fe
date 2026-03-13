@@ -1,47 +1,25 @@
-<ul nz-menu nzMode="inline">
-  <li
-    nz-menu-item
-    routerLink="/dashboard"
-    routerLinkActive="ant-menu-item-selected"
-    [routerLinkActiveOptions]="{ exact: true }"
-    (click)="close()"
-  >
-    <span nz-icon nzType="appstore"></span>
-    <span>Dashboard</span>
-  </li>
+<div class="drawer-container">
+  <ul nz-menu nzMode="inline" class="menu-list">
+    @for (item of menuDrawer; track item.url) {
+      <li
+        nz-menu-item
+        [routerLink]="item.url"
+        routerLinkActive="ant-menu-item-selected"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [nzDisabled]="item.isDisable"
+        (click)="navigate(item)"
+      >
+        <span nz-icon [nzType]="item.icon"></span>
+        <span>{{ item.content | translate }}</span>
+      </li>
+    }
+  </ul>
 
-  <li
-    nz-menu-item
-    routerLink="/warehouse"
-    routerLinkActive="ant-menu-item-selected"
-    [routerLinkActiveOptions]="{ exact: true }"
-    (click)="close()"
-  >
-    <span nz-icon nzType="inbox"></span>
-    <span>Warehouse</span>
-  </li>
-
-  <li
-    nz-menu-item
-    routerLink="/purchase-history"
-    routerLinkActive="ant-menu-item-selected"
-    [routerLinkActiveOptions]="{ exact: true }"
-    nzDisabled="true"
-    (click)="close()"
-  >
-    <span nz-icon nzType="file-text"></span>
-    <span>Purchase History</span>
-  </li>
-
-  <li
-    nz-menu-item
-    routerLink="/setting"
-    routerLinkActive="ant-menu-item-selected"
-    [routerLinkActiveOptions]="{ exact: true }"
-    (click)="close()"
-    nzDisabled="true"
-  >
-    <span nz-icon nzType="setting"></span>
-    <span>Setting</span>
-  </li>
-</ul>
+  <!-- logout button -->
+  <div class="logout-container">
+    <button nz-button nzType="default" nzBlock (click)="logout()">
+      <span nz-icon nzType="logout"></span>
+      {{ "menu.logout" | translate }}
+    </button>
+  </div>
+</div>

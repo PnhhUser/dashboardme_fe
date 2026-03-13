@@ -10,6 +10,10 @@
       class="login-form"
       (ngSubmit)="onSubmit()"
     >
+      <div *ngIf="authError$ | async as error" class="login-error">
+        {{ error.Message }}
+      </div>
+
       <!-- Username field -->
       <nz-form-item>
         <nz-form-control [nzErrorTip]="usernameErrorTpl">
@@ -66,8 +70,8 @@
       </ng-template>
 
       <!-- Remember me and forgot password -->
-      <div nz-row class="bottom-16">
-        <!-- <div nz-col [nzSpan]="14">
+      <!-- <div nz-row class="bottom-16"> -->
+      <!-- <div nz-col [nzSpan]="14">
           <label
             nz-checkbox
             formControlName="remember"
@@ -77,14 +81,19 @@
           </label>
         </div> -->
 
-        <!--Forgot password link -->
-        <div nz-col [nzSpan]="10">
+      <!--Forgot password link -->
+      <!-- <div nz-col [nzSpan]="10">
           <a>{{ "login.forgotPassword" | translate }}</a>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
 
       <!-- Submit button and register link -->
-      <button nz-button class="btn-login bottom-16" [nzType]="'primary'">
+      <button
+        nz-button
+        class="btn-login bottom-16"
+        [nzType]="'primary'"
+        [disabled]="loginForm.invalid || loginForm.pristine"
+      >
         {{ "login.loginButton" | translate }}
       </button>
 
@@ -92,3 +101,5 @@
     </form>
   </nz-card>
 </div>
+
+<app-loader [loading]="(authLoading$ | async) ?? false" />

@@ -6,6 +6,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { loginGuard } from './core/guards/login-auth.guard';
 import { authGuard } from './core/guards/auth.guard';
 import { WarehouseRoute } from './pages/warehouse/warehouse.route';
+import { SettingsRoute } from './pages/settings/settings.route';
+import { DataRoute } from './pages/data/data.route';
 
 export const routes: Routes = [
   {
@@ -13,17 +15,25 @@ export const routes: Routes = [
     component: LoginComponent,
     canActivate: [loginGuard],
   },
+
   {
     path: '',
     redirectTo: DASHBOARD_ROUTE,
     pathMatch: 'full',
   },
+
   {
     path: '',
     component: AppLayout,
     canActivate: [authGuard],
-    children: [DashboardRoute, ...WarehouseRoute],
+    children: [
+      ...DashboardRoute,
+      ...WarehouseRoute,
+      ...SettingsRoute,
+      ...DataRoute,
+    ],
   },
+
   {
     path: '**',
     redirectTo: DASHBOARD_ROUTE,

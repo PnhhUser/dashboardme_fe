@@ -1,0 +1,20 @@
+<app-header>
+  <div title>{{ "data.title" | translate }}</div>
+  <div end>
+    <nz-icon
+      nzType="align-right"
+      nzTheme="outline"
+      (click)="onMenuDrawer()"
+    ></nz-icon>
+  </div>
+</app-header>
+
+<div class="container-data">
+  <app-card />
+  <app-card />
+  <app-card />
+  <app-card />
+  <app-card />
+  <app-card />
+  <app-card />
+</div>

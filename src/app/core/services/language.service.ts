@@ -3,28 +3,36 @@ import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { en_US, vi_VN } from 'ng-zorro-antd/i18n';
 import { TranslateService } from '@ngx-translate/core';
 
+export type AppLanguage = 'en' | 'vi';
+
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
+  private readonly LANG_KEY = 'lang';
+
   constructor(
     private nzI18n: NzI18nService,
     private translate: TranslateService,
   ) {
-    const saved = localStorage.getItem('lang') || 'en';
+    const saved = (localStorage.getItem(this.LANG_KEY) as AppLanguage) || 'en';
     this.setLanguage(saved);
   }
 
-  setLanguage(lang: string) {
-    localStorage.setItem('lang', lang);
+  setLanguage(lang: AppLanguage) {
+    localStorage.setItem(this.LANG_KEY, lang);
 
-    // 1️⃣ NG-ZORRO
+    // NG-ZORRO
     this.nzI18n.setLocale(lang === 'vi' ? vi_VN : en_US);
 
-    // 2️⃣ ngx-translate
+    // ngx-translate
     this.translate.use(lang);
 
-    // 3️⃣ HTML lang attribute (SEO + accessibility)
+    // HTML lang
     document.documentElement.lang = lang;
+  }
+
+  getLanguage(): AppLanguage {
+    return (localStorage.getItem(this.LANG_KEY) as AppLanguage) || 'en';
   }
 }

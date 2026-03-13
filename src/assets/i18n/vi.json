@@ -4,6 +4,10 @@
     "language": {
       "vi": "Tiếng Việt",
       "en": "Tiếng Anh"
+    },
+    "title": "Cài đặt",
+    "catelog": {
+      "language": "Ngôn ngữ"
     }
   },
   "login": {
@@ -18,5 +22,18 @@
   "validation": {
     "required": "Trường này là bắt buộc",
     "minlength": "Độ dài tối thiểu là {{min}} ký tự"
+  },
+  "menu": {
+    "title": "Danh mục chức năng",
+    "logout": "Đăng xuất"
+  },
+  "dashboard": {
+    "title": "Tổng quan"
+  },
+  "data": {
+    "title": "Dữ liệu"
+  },
+  "warehouse": {
+    "title": "Kho hàng"
   }
 }
