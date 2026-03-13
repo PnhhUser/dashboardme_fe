@@ -24,14 +24,26 @@
     "minlength": "Minimum length is {{min}} characters"
   },
   "menu": {
-    "title": "Menu",
+    "title": "Navigation",
     "logout": "Logout"
   },
   "dashboard": {
     "title": "Dashboard"
   },
   "data": {
-    "title": "Data"
+    "title": "Data",
+    "category": {
+      "title": "Category",
+      "description": "Organize product groups"
+    },
+    "account": {
+      "title": "Account",
+      "description": "Manage system accounts"
+    },
+    "product": {
+      "title": "Product",
+      "description": "Manage product data"
+    }
   },
   "warehouse": {
     "title": "Warehouse"

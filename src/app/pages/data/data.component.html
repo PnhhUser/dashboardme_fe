@@ -10,11 +10,7 @@
 </app-header>
 
 <div class="container-data">
-  <app-card />
-  <app-card />
-  <app-card />
-  <app-card />
-  <app-card />
-  <app-card />
-  <app-card />
+  @for (card of cardList; track card.name) {
+    <app-card [card]="card" />
+  }
 </div>

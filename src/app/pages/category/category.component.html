@@ -1,0 +1,13 @@
+<app-header>
+  <div start>
+    <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()"></nz-icon>
+  </div>
+  <div title>{{ "data.category.title" | translate }}</div>
+  <div end>
+    <nz-icon nzType="plus" nzTheme="outline" (click)="addCategory()"></nz-icon>
+  </div>
+</app-header>
+
+<div class="container-category">
+  <app-card-category />
+</div>

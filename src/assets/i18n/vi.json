@@ -31,7 +31,19 @@
     "title": "Tổng quan"
   },
   "data": {
-    "title": "Dữ liệu"
+    "title": "Dữ liệu",
+    "category": {
+      "title": "Thể loại",
+      "description": "Sắp xếp, tổ chức, quản lý"
+    },
+    "account": {
+      "title": "Tài khoản",
+      "description": "Quản lí tài khoản hệ thống"
+    },
+    "product": {
+      "title": "Sản phẩm",
+      "description": "Quản lí dữ liệu sản phẩm"
+    }
   },
   "warehouse": {
     "title": "Kho hàng"

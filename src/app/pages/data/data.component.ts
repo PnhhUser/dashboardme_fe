@@ -5,7 +5,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDrawerModule, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MenuDrawerComponent } from '../../shared/components/menu/menu.component';
-import { CardComponent } from '../../shared/components/card/card.component';
+import {
+  Card,
+  CardComponent,
+} from '../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-data',
@@ -26,6 +29,27 @@ export class DataComponent {
     private drawerService: NzDrawerService,
     private translateService: TranslateService,
   ) {}
+
+  cardList: Card[] = [
+    {
+      name: 'data.product.title',
+      url: 'data/product',
+      icon: 'product',
+      description: 'data.product.description',
+    },
+    {
+      name: 'data.category.title',
+      url: 'data/category',
+      icon: 'tags',
+      description: 'data.category.description',
+    },
+    {
+      name: 'data.account.title',
+      url: 'data/account',
+      icon: 'team',
+      description: 'data.account.description',
+    },
+  ];
 
   onMenuDrawer(): void {
     this.drawerService.create({
