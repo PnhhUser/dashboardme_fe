@@ -34,7 +34,32 @@
     "title": "Data",
     "category": {
       "title": "Category",
-      "description": "Organize product groups"
+      "description": "Organize product groups",
+      "button": {
+        "update": "Update",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "datetime": {
+        "createdAt": "Created at",
+        "lastUpdated": "Last updated"
+      },
+      "modal": {
+        "remove": {
+          "title": "Delete category",
+          "content": "Are you sure you want to delete the category <strong>{{name}}</strong>?"
+        },
+        "edit": {
+          "title": "Update category",
+          "inputName": "Caterogy name",
+          "inputDescription": "Description"
+        },
+        "add": {
+          "title": "Add category",
+          "inputName": "Caterogy name",
+          "inputDescription": "Description"
+        }
+      }
     },
     "account": {
       "title": "Account",

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, switchMap, take } from 'rxjs';
-import { IAuthResponse, ILogin } from '../models/auth.model';
-import { ApiResponse } from '../models/response.model';
+import { ILoginSuccess, ILogin } from '../models/auth.model';
+import { IApiResponse } from '../models/response.model';
 import { Store } from '@ngrx/store';
-import { selectAccessToken } from '../../store/selectors/auth.selector';
+import { selectAccessToken } from '../../store/auth/auth.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +17,8 @@ export class AuthService {
     private store: Store,
   ) {}
 
-  login(data: ILogin): Observable<ApiResponse<IAuthResponse>> {
-    return this.http.post<ApiResponse<IAuthResponse>>(
+  login(data: ILogin): Observable<IApiResponse<ILoginSuccess>> {
+    return this.http.post<IApiResponse<ILoginSuccess>>(
       `${this.api}/login`,
       data,
       {
@@ -45,8 +45,8 @@ export class AuthService {
     );
   }
 
-  refreshToken(): Observable<ApiResponse<IAuthResponse>> {
-    return this.http.post<ApiResponse<IAuthResponse>>(
+  refreshToken(): Observable<IApiResponse<ILoginSuccess>> {
+    return this.http.post<IApiResponse<ILoginSuccess>>(
       `${this.api}/refresh-token`,
       {},
       {

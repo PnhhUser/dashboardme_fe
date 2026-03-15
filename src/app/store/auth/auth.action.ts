@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IAuthResponse, ILogin } from '../../core/models/auth.model';
+import { ILoginSuccess, ILogin } from '../../core/models/auth.model';
 import { IError } from '../../core/models/response.model';
 
 // login
@@ -10,7 +10,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Login API] Login Success',
-  props<{ auth: IAuthResponse }>(),
+  props<{ auth: ILoginSuccess }>(),
 );
 
 export const loginFailure = createAction(
@@ -33,7 +33,7 @@ export const restoreAuth = createAction('[Auth] Restore Auth');
 
 export const restoreAuthSuccess = createAction(
   '[Auth API] Restore Success',
-  props<{ auth: IAuthResponse }>(),
+  props<{ auth: ILoginSuccess }>(),
 );
 
 export const restoreAuthFailure = createAction('[Auth API] Restore Failure');

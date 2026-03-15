@@ -11,7 +11,7 @@
       (ngSubmit)="onSubmit()"
     >
       <div *ngIf="authError$ | async as error" class="login-error">
-        {{ error.Message }}
+        {{ error.message }}
       </div>
 
       <!-- Username field -->

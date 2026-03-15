@@ -33,8 +33,33 @@
   "data": {
     "title": "Dữ liệu",
     "category": {
-      "title": "Thể loại",
-      "description": "Sắp xếp, tổ chức, quản lý"
+      "title": "Danh mục",
+      "description": "Sắp xếp, tổ chức, quản lý",
+      "button": {
+        "update": "Cập nhật",
+        "cancel": "Hủy",
+        "save": "Lưu"
+      },
+      "datetime": {
+        "createdAt": "Tạo lúc",
+        "lastUpdated": "Cập nhật lần cuối"
+      },
+      "modal": {
+        "remove": {
+          "title": "Xóa danh mục",
+          "content": "Bạn có chắc chắn muốn xóa danh mục <strong>{{name}}</strong> không?"
+        },
+        "edit": {
+          "title": "Cập nhật danh mục",
+          "inputName": "Tên danh mục",
+          "inputDescription": "Mô tả"
+        },
+        "add": {
+          "title": "Thêm danh mục",
+          "inputName": "Tên danh mục",
+          "inputDescription": "Mô tả"
+        }
+      }
     },
     "account": {
       "title": "Tài khoản",

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import {
   selectAuthInitialized,
   selectIsLoggedIn,
-} from '../../store/selectors/auth.selector';
+} from '../../store/auth/auth.selector';
 import { combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 

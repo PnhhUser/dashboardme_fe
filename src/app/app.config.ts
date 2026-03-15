@@ -14,18 +14,22 @@ import en from '@angular/common/locales/en';
 import vi from '@angular/common/locales/vi';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule } from '@ngx-translate/core';
-import { authReducer } from './store/reducers/auth.reducer';
-import { AuthEffects } from './store/effects/auth.effect';
+
+import { AuthEffects } from './store/auth/auth.effect';
+import { categoryReducer } from './store/category/category.reducer';
+import { authReducer } from './store/auth/auth.reducer';
+import { CategoryEffect } from './store/category/category.effects';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 registerLocaleData(en);
 registerLocaleData(vi);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(FormsModule),
@@ -46,8 +50,9 @@ export const appConfig: ApplicationConfig = {
 
     provideStore({
       auth: authReducer,
+      category: categoryReducer,
     }),
 
-    provideEffects([AuthEffects]),
+    provideEffects([AuthEffects, CategoryEffect]),
   ],
 };

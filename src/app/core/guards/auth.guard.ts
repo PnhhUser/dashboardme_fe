@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import {
   selectAuthInitialized,
   selectIsLoggedIn,
-} from '../../store/selectors/auth.selector';
+} from '../../store/auth/auth.selector';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 
 export const authGuard: CanActivateFn = () => {

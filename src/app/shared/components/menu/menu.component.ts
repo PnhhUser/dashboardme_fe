@@ -6,7 +6,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { IMenuDrawer, MENU_DRAWER } from '../../../core/config/menu.config';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Store } from '@ngrx/store';
-import * as AuthActions from '../../../store/actions/auth.action';
+import * as AuthActions from '../../../store/auth/auth.action';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

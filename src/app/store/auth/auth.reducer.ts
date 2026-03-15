@@ -1,16 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import * as AuthActions from '../actions/auth.action';
-import { IAuthResponse } from '../../core/models/auth.model';
-import { IError } from '../../core/models/response.model';
+import * as AuthActions from './auth.action';
+import { IAuthState } from './auth.state';
 
-export interface AuthState {
-  auth: IAuthResponse | null;
-  loading: boolean;
-  error: IError | null;
-  initialized: boolean;
-}
-
-export const initialState: AuthState = {
+export const authState: IAuthState = {
   auth: null,
   loading: false,
   error: null,
@@ -18,7 +10,7 @@ export const initialState: AuthState = {
 };
 
 export const authReducer = createReducer(
-  initialState,
+  authState,
 
   // LOGIN
   on(AuthActions.login, (state) => ({

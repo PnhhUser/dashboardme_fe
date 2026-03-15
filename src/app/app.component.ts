@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LanguageService } from './core/services/language.service';
 import { Store } from '@ngrx/store';
-import * as AuthActions from './store/actions/auth.action';
+import * as AuthActions from './store/auth/auth.action';
 
 @Component({
   selector: 'app-root',

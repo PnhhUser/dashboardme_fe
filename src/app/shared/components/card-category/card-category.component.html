@@ -1,8 +1,8 @@
-<nz-card class="category-card" nzBordered="false">
+<nz-card class="category-card" nzBordered="false" (click)="onClick(card)">
   <div class="category-container">
     <div class="category-left">
-      <div class="category-title">Giáo dục</div>
-      <div class="category-desc">Dụng cụ học tập</div>
+      <div class="category-title">{{ card.name }}</div>
+      <div class="category-desc">{{ card.description }}</div>
     </div>
 
     <div class="category-right">

@@ -1,4 +1,4 @@
-export interface ApiResponse<T> {
+export interface IApiResponse<T> {
   success: boolean;
   data?: T;
   error?: IError;
@@ -10,7 +10,7 @@ export interface IErrorResponse<T> {
 }
 
 export interface IError {
-  Code: string;
-  Status: number;
-  Message: string;
+  code: string;
+  status: number;
+  message: string;
 }

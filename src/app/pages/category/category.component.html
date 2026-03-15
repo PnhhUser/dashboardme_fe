@@ -8,6 +8,33 @@
   </div>
 </app-header>
 
-<div class="container-category">
-  <app-card-category />
+<div class="container-category" *ngIf="categories$ | async as categories">
+  @for (card of categories; track card.id) {
+    <app-card-category [card]="card" (detailCard)="detailCategory($event)" />
+  }
 </div>
+
+<ng-template #remove>
+  <button
+    nz-button
+    nzType="default"
+    nzDanger
+    (click)="removeCategory(selectedCategory)"
+  >
+    <span nz-icon nzType="delete"></span>
+  </button>
+</ng-template>
+
+<ng-template #update>
+  <div class="drawer-footer">
+    <button
+      nz-button
+      nzType="primary"
+      (click)="updateCategory(selectedCategory)"
+    >
+      {{ "data.category.button.update" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<app-loader [loading]="(categoriesLoading$ | async) ?? false" />

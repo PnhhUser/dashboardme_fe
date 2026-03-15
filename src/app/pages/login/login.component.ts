@@ -17,12 +17,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 
-import * as AuthActions from '../../store/actions/auth.action';
+import * as AuthActions from '../../store/auth/auth.action';
 import {
   selectAuthError,
   selectAuthLoading,
-  selectIsLoggedIn,
-} from '../../store/selectors/auth.selector';
+} from '../../store/auth/auth.selector';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({

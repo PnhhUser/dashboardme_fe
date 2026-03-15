@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../layout/header/header.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CardProductComponent } from '../../shared/components/card-product/card-product.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,7 @@ import { CardProductComponent } from '../../shared/components/card-product/card-
     NzIconModule,
     TranslateModule,
     CardProductComponent,
+    NzButtonModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.less',
