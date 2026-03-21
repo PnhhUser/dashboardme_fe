@@ -1,0 +1,125 @@
+<app-header>
+  <div start>
+    <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()"></nz-icon>
+  </div>
+
+  <div title>Update Product</div>
+</app-header>
+
+<div class="container">
+  <form
+    nz-form
+    nzLayout="vertical"
+    [formGroup]="updateForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <nz-row>
+      <!-- Name -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzRequired>Name</nz-form-label>
+          <nz-form-control nzErrorTip="Name is required">
+            <input nz-input formControlName="name" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <!-- Code -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzRequired>Code</nz-form-label>
+          <nz-form-control nzErrorTip="Code is required">
+            <input nz-input formControlName="code" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <!-- Category -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label nzRequired>Category</nz-form-label>
+          <nz-form-control nzErrorTip="Please select category">
+            <nz-select formControlName="categoryId">
+              @for (c of categories$ | async; track c.id) {
+                <nz-option [nzValue]="c.id" [nzLabel]="c.name"></nz-option>
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <!-- Status -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Status</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="active">
+              @for (s of statusList; track s.value) {
+                <nz-option [nzValue]="s.value" [nzLabel]="s.label"></nz-option>
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <!-- Stock -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Stock</nz-form-label>
+          <nz-form-control>
+            <nz-input-number
+              formControlName="stock"
+              [nzMin]="0"
+              style="width: 100%"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+
+      <!-- Price -->
+      <nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-label>Price</nz-form-label>
+          <nz-form-control>
+            <nz-input-number
+              formControlName="price"
+              [nzMin]="0"
+              style="width: 100%"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+
+    <!-- Description -->
+    <nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            formControlName="description"
+            rows="4"
+            placeholder="Enter description"
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button nz-button nzType="default" (click)="onBack()">Cancel</button>
+
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="updateForm.invalid"
+        htmlType="submit"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-loader [loading]="(loading$ | async) ?? false" />

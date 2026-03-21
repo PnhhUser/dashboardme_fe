@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { ICategoryState } from './category.statte';
+import { ICategoryState } from './category.state';
 import * as CategoryActions from '../category/category.actions';
 
 export const categoryState: ICategoryState = {

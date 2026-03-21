@@ -3,9 +3,8 @@
     <nz-icon nzType="rollback" nzTheme="outline" (click)="onBack()"></nz-icon>
   </div>
 
-  <div title>{{ "data.product.title" | translate }}</div>
+  <div title>{{ "data.productDetail.title" | translate }}</div>
 
-  <!-- remove icon -->
   <div end>
     <nz-icon
       nzType="delete"
@@ -17,63 +16,104 @@
 </app-header>
 
 <div class="product-page">
-  <div class="product-detail">
-    <!-- IMAGE -->
-    <nz-carousel nzAutoPlay class="product-carousel">
-      <div nz-carousel-content *ngFor="let img of images">
-        <img [src]="img" class="product-image" />
-      </div>
-    </nz-carousel>
-
-    <div class="product-info">
-      <div class="product-code">DSFSD87</div>
-
-      <h1 class="product-name">Bút bi</h1>
-
-      <div class="product-tags">
-        <nz-tag nzColor="blue">Giáo dục</nz-tag>
-
-        <nz-tag nzColor="green">
-          <nz-icon nzType="check-circle"></nz-icon>
-          Đang bán
-        </nz-tag>
-      </div>
-
-      <div class="product-meta">
-        <div>Stock: <span>50</span></div>
-        <div>Price: <span>500</span></div>
-      </div>
-
-      <div class="product-datetime">
-        <div>
-          <nz-icon nzType="calendar"></nz-icon>
-          Created: 15/03/2026
-        </div>
-
-        <div>
-          <nz-icon nzType="clock-circle"></nz-icon>
-          Updated: 16/03/2026
-        </div>
-      </div>
-
-      <nz-divider></nz-divider>
-
-      <div class="product-section">
-        <h3>Description</h3>
-
-        <p class="product-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eos
-          rerum veritatis pariatur dignissimos architecto.
-        </p>
-      </div>
+  <!-- 🔥 SKELEKON -->
+  <ng-container *ngIf="loading$ | async; else content">
+    <div class="product-detail">
+      <nz-skeleton></nz-skeleton>
     </div>
-  </div>
+  </ng-container>
+
+  <!-- 🔥 CONTENT -->
+  <ng-template #content>
+    <ng-container *ngIf="product$ | async as product">
+      <div class="product-detail">
+        <!-- IMAGE -->
+        <nz-carousel
+          [nzAutoPlay]="product.images.length > 1"
+          class="product-carousel"
+        >
+          @if (!product.images || product.images.length === 0) {
+            <div nz-carousel-content>
+              <img src="assets/images/not-image.png" class="product-image" />
+            </div>
+          } @else {
+            @for (img of product.images; track img.id) {
+              <div nz-carousel-content>
+                <img [src]="getImageUrl(img.imageUrl)" class="product-image" />
+              </div>
+            }
+          }
+        </nz-carousel>
+
+        <div class="product-info">
+          <div class="product-code">{{ product.code }}</div>
+
+          <h1 class="product-name">{{ product.name }}</h1>
+
+          <div class="product-tags">
+            <nz-tag nzColor="blue">
+              {{ product.categoryModel.name }}
+            </nz-tag>
+
+            <nz-tag [nzColor]="product.active ? 'green' : 'red'">
+              <nz-icon
+                [nzType]="product.active ? 'check-circle' : 'close-circle'"
+              ></nz-icon>
+              {{ product.active ? "Đang bán" : "Ngưng bán" }}
+            </nz-tag>
+          </div>
+
+          <div class="product-meta">
+            <div>
+              {{ "data.productDetail.quantity" | translate }}:
+              <span>{{ product.stock }}</span>
+            </div>
+            <div>
+              {{ "data.productDetail.price" | translate }}:
+              <span>{{ product.price }}</span>
+            </div>
+          </div>
+
+          <div class="product-datetime">
+            <div>
+              <nz-icon nzType="calendar"></nz-icon>
+              {{ "data.productDetail.created" | translate }}:
+              {{ product.createdAt | date: "dd/MM/yyyy" }}
+            </div>
+
+            <div *ngIf="product.updatedAt">
+              <nz-icon nzType="clock-circle"></nz-icon>
+              {{ "data.productDetail.updated" | translate }}:
+              {{ product.updatedAt | date: "dd/MM/yyyy" }}
+            </div>
+          </div>
+
+          <nz-divider></nz-divider>
+
+          <div class="product-section">
+            <h3>{{ "data.productDetail.description" | translate }}</h3>
+
+            <p class="product-description">
+              {{ product.description || "No description" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
 
   <!-- FIXED BUTTON -->
-  <div class="product-actions">
+  <div class="product-actions" *ngIf="!(loading$ | async)">
+    <button nz-button nzType="default" nzBlock (click)="setImage()">
+      <nz-icon nzType="picture"></nz-icon>
+      {{ "data.productDetail.button.btnImage" | translate }}
+    </button>
+
     <button nz-button nzType="primary" nzBlock (click)="onUpdate()">
       <nz-icon nzType="edit"></nz-icon>
-      Update product
+      {{ "data.productDetail.button.btnUpdate" | translate }}
     </button>
   </div>
 </div>
+
+<app-loader [loading]="(loading$ | async) ?? false" />

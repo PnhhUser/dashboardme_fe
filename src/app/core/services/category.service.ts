@@ -13,14 +13,8 @@ import { IApiResponse } from '../models/response.model';
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
   private api = 'http://localhost:5127/api/Category';
-  token$;
 
-  constructor(
-    private http: HttpClient,
-    private store: Store,
-  ) {
-    this.token$ = this.store.select(selectAccessToken);
-  }
+  constructor(private http: HttpClient) {}
 
   getCategories(): Observable<IApiResponse<ICategory[]>> {
     return this.http.get<IApiResponse<ICategory[]>>(`${this.api}/list`);

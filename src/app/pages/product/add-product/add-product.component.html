@@ -1,0 +1,103 @@
+<form
+  class="form-add-product"
+  nz-form
+  nzLayout="vertical"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <!-- Name -->
+  <nz-form-item>
+    <nz-form-label nzRequired>Name</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="name" placeholder="Enter product name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Code -->
+  <nz-form-item>
+    <nz-form-label nzRequired>Code</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="code" placeholder="Enter product code" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Category -->
+  <nz-form-item>
+    <nz-form-label nzRequired>Category</nz-form-label>
+    <nz-form-control>
+      <nz-select formControlName="categoryId" nzPlaceHolder="Select category">
+        <nz-option
+          *ngFor="let c of categories$ | async"
+          [nzLabel]="c.name"
+          [nzValue]="c.id"
+        >
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Status -->
+  <nz-form-item>
+    <nz-form-label>Status</nz-form-label>
+    <nz-form-control>
+      <nz-select formControlName="active">
+        <nz-option
+          *ngFor="let s of statusList"
+          [nzLabel]="s.label"
+          [nzValue]="s.value"
+        >
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Quantity -->
+  <nz-form-item>
+    <nz-form-label>Quantity</nz-form-label>
+    <nz-form-control>
+      <nz-input-number
+        formControlName="stock"
+        nzMin="0"
+        style="width: 100%"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Price -->
+  <nz-form-item>
+    <nz-form-label>Price</nz-form-label>
+    <nz-form-control>
+      <nz-input-number
+        formControlName="price"
+        nzMin="0"
+        style="width: 100%"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Description -->
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control>
+      <textarea
+        nz-input
+        rows="4"
+        formControlName="description"
+        placeholder="Enter description"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Footer -->
+  <div class="form-footer">
+    <button nz-button nzType="default" (click)="onCancel()">Cancel</button>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="form.invalid"
+      htmlType="submit"
+    >
+      Create Product
+    </button>
+  </div>
+</form>

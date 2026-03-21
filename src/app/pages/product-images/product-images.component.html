@@ -1,0 +1,84 @@
+<app-header>
+  <div start>
+    <nz-icon nzType="rollback" (click)="onBack()"></nz-icon>
+  </div>
+
+  <div title>Picture</div>
+
+  <div end>
+    <nz-icon nzType="upload" (click)="onUploadImage()"></nz-icon>
+  </div>
+</app-header>
+
+<div class="container">
+  <div class="content">
+    <!-- THUMBNAIL -->
+    <div class="thumbnail">
+      <p class="title">Thumbnail</p>
+
+      <div class="picture">
+        <img
+          nz-image
+          [nzSrc]="
+            selectedThumbnail
+              ? getImageUrl(selectedThumbnail.imageUrl)
+              : 'assets/images/not-image.png'
+          "
+        />
+      </div>
+    </div>
+
+    <!-- LIST IMAGES -->
+    <div class="images">
+      <p class="title">Choose images</p>
+
+      @for (image of images$ | async; track image.id) {
+        <div
+          class="image-item"
+          [class.active]="selectedThumbnail?.id === image.id"
+        >
+          <!-- IMAGE -->
+          <div class="picture">
+            <img nz-image [nzSrc]="getImageUrl(image.imageUrl)" />
+          </div>
+
+          <!-- INFO (optional) -->
+          <div class="info" (click)="selectThumbnail(image)">
+            <span
+              >#{{ image.displayOrder }}
+              {{ image.isPrimary ? "Thumbnail" : "" }}</span
+            >
+          </div>
+
+          <!-- ACTION -->
+          <div class="actions">
+            <button
+              nz-button
+              nzType="text"
+              nzDanger
+              [disabled]="image.isPrimary"
+              (click)="onRemoveImage(image)"
+            >
+              <nz-icon nzType="delete"></nz-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- FIXED ACTION -->
+  <div class="footer">
+    <button
+      nz-button
+      nzType="primary"
+      nzBlock
+      (click)="onChange()"
+      [disabled]="!isChanged"
+    >
+      Change
+    </button>
+  </div>
+</div>
+
+<app-loader [loading]="(loading$ | async) ?? false" />

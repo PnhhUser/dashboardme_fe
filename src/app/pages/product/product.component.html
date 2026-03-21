@@ -5,20 +5,33 @@
   <div title>{{ "data.product.title" | translate }}</div>
 </app-header>
 
-<div class="container-product">
-  <app-card-product />
-</div>
+<!-- SKELEKON -->
+<ng-container *ngIf="loading$ | async; else content">
+  <div style="padding: 0 20px">
+    <nz-skeleton></nz-skeleton>
+  </div>
+</ng-container>
+
+<ng-template #content>
+  <div class="container-product" *ngIf="products$ | async as products">
+    @for (product of products; track product.id) {
+      <app-card-product [card]="product"></app-card-product>
+    }
+  </div>
+</ng-template>
 
 <div class="floating-tools">
-  <button nz-button nzShape="circle">
+  <button nz-button nzShape="circle" (click)="onDrawerCreateProduct()">
     <span nz-icon nzType="plus"></span>
   </button>
 
   <button nz-button nzShape="circle">
-    <nz-icon nzType="search" nzTheme="outline" />
+    <nz-icon nzType="search" nzTheme="outline" (click)="onFilter()" />
   </button>
 
-  <button nz-button nzShape="circle" nzDanger>
-    <span nz-icon nzType="up"></span>
+  <button nz-button nzShape="circle">
+    <nz-icon nzType="qrcode" nzTheme="outline" (click)="onScanCodeProduct()" />
   </button>
 </div>
+
+<app-loader [loading]="(loading$ | async) ?? false" />

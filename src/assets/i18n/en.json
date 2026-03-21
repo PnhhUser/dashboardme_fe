@@ -68,6 +68,18 @@
     "product": {
       "title": "Product",
       "description": "Manage product data"
+    },
+    "productDetail": {
+      "title": "Product detail",
+      "quantity": "Quantity",
+      "price": "Price",
+      "created": "Created",
+      "updated": "Updated",
+      "description": "Desciption",
+      "button": {
+        "btnUpdate": "Update",
+        "btnImage": "Picture"
+      }
     }
   },
   "warehouse": {

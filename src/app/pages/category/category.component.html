@@ -8,11 +8,20 @@
   </div>
 </app-header>
 
-<div class="container-category" *ngIf="categories$ | async as categories">
-  @for (card of categories; track card.id) {
-    <app-card-category [card]="card" (detailCard)="detailCategory($event)" />
-  }
-</div>
+<!-- SKELEKON -->
+<ng-container *ngIf="categoriesLoading$ | async; else content">
+  <div style="padding: 0 20px">
+    <nz-skeleton></nz-skeleton>
+  </div>
+</ng-container>
+
+<ng-template #content>
+  <div class="container-category" *ngIf="categories$ | async as categories">
+    @for (card of categories; track card.id) {
+      <app-card-category [card]="card" (detailCard)="detailCategory($event)" />
+    }
+  </div>
+</ng-template>
 
 <ng-template #remove>
   <button

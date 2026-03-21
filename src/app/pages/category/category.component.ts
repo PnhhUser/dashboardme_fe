@@ -44,6 +44,7 @@ import {
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'app-category',
@@ -59,6 +60,7 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
     NzModalModule,
     TranslateModule,
     LoaderComponent,
+    NzSkeletonModule,
   ],
   templateUrl: './category.component.html',
   styleUrl: './category.component.less',

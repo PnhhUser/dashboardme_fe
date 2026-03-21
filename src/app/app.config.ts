@@ -23,6 +23,8 @@ import { categoryReducer } from './store/category/category.reducer';
 import { authReducer } from './store/auth/auth.reducer';
 import { CategoryEffect } from './store/category/category.effects';
 import { authInterceptor } from './core/interceptor/auth.interceptor';
+import { productReducer } from './store/product/product.reducer';
+import { ProductEffect } from './store/product/product.effect';
 
 registerLocaleData(en);
 registerLocaleData(vi);
@@ -51,8 +53,9 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       auth: authReducer,
       category: categoryReducer,
+      product: productReducer,
     }),
 
-    provideEffects([AuthEffects, CategoryEffect]),
+    provideEffects([AuthEffects, CategoryEffect, ProductEffect]),
   ],
 };

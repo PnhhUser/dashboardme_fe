@@ -68,6 +68,18 @@
     "product": {
       "title": "Sản phẩm",
       "description": "Quản lí dữ liệu sản phẩm"
+    },
+    "productDetail": {
+      "title": "Chi tiết sản phẩm",
+      "quantity": "Số lượng",
+      "price": "Giá sản phẩm",
+      "created": "Ngày tạo",
+      "updated": "Ngày sửa",
+      "description": "Chi tiết",
+      "button": {
+        "btnUpdate": "Cập nhật",
+        "btnImage": "Hình ảnh"
+      }
     }
   },
   "warehouse": {
