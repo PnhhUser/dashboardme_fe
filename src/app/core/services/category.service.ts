@@ -9,10 +9,11 @@ import {
 import { Store } from '@ngrx/store';
 import { selectAccessToken } from '../../store/auth/auth.selector';
 import { IApiResponse } from '../models/response.model';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
-  private api = 'http://localhost:5127/api/Category';
+  private api = environment.apiUrl + '/Category';
 
   constructor(private http: HttpClient) {}
 

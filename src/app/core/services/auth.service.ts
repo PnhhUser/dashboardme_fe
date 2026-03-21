@@ -5,12 +5,13 @@ import { ILoginSuccess, ILogin } from '../models/auth.model';
 import { IApiResponse } from '../models/response.model';
 import { Store } from '@ngrx/store';
 import { selectAccessToken } from '../../store/auth/auth.selector';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private api = 'http://localhost:5127/api/authentication';
+  private api = environment.apiUrl + '/authentication';
 
   constructor(
     private http: HttpClient,

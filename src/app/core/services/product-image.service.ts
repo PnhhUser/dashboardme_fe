@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../models/response.model';
 import { IImageProduct, ISetThumbnail } from '../models/product.model';

@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Store } from '@ngrx/store';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';
 import * as ProductActions from '../../store/product/product.action';
 import {
   selectProductLoading,

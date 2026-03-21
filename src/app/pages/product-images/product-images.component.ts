@@ -17,7 +17,7 @@ import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { ProductImageService } from '../../core/services/product-image.service';
 import { IImageProduct } from '../../core/models/product.model';
 import { map, Observable, take } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';
 import {
   selectProductLoading,
   selectProductOne,
